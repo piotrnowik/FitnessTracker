@@ -27,6 +27,14 @@ public class Achievement {
     private User user;
 
     private String name;
+
+    @Column(name = "earned_at")
     private LocalDateTime earnedAt;
 
+
+    public Achievement(String name, LocalDateTime earnedAt, User user) {
+        this.name = name;
+        this.earnedAt = earnedAt;
+        this.user = user;
+    }
 }
