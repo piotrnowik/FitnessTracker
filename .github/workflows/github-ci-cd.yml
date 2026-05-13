@@ -48,7 +48,7 @@ jobs:
           retention-days: 7
 
   lab03-entities:
-    name: LAB03-1 — entities (Lab03EntitiesTest)
+    name: LAB03 — entities (Lab03EntitiesTest)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -61,14 +61,40 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run LAB03-1 tests
+      - name: Run LAB03 tests
         run: mvn -B test -Dtest=Lab03EntitiesTest -DfailIfNoTests=false --file pom.xml
 
-      - name: Publish LAB03-1 test results
+      - name: Publish LAB03 test results
         if: always()
         uses: actions/upload-artifact@v5
         with:
           name: surefire-lab03-entities
+          path: target/surefire-reports/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  lab04:
+    name: LAB04 (UserApiIntegrationTest)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Run LAB04 tests
+        run: mvn -B test -Dtest=UserApiIntegrationTest -DfailIfNoTests=false --file pom.xml
+
+      - name: Publish LAB04 test results
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: surefire-lab04
           path: target/surefire-reports/
           if-no-files-found: ignore
           retention-days: 7
